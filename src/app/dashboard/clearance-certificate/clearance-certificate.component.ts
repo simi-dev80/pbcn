@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-clearance-certificate',
@@ -9,9 +10,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class ClearanceCertificateComponent implements OnInit {
   characterClearanceForm: FormGroup;
   stepCount = 0;
-  constructor() { }
+  constructor(private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Clearance Certificate');
     this.initCharacterClearanceForm();
   }
 

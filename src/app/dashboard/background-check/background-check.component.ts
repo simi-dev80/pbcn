@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-background-check',
@@ -9,9 +10,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class BackgroundCheckComponent implements OnInit {
   backgroundCheckForm: FormGroup;
   stepCount = 0;
-  constructor() { }
+  constructor(private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Background Check');
     this.initBackgroundCheckForm();
   }
 
