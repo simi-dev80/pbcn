@@ -1,0 +1,297 @@
+<div class="actions" *ngIf="stepCount == 0">
+  <p>Already have an account?</p>
+  <button class="btn btn-light" [routerLink]="['/signin']" type="button">Sign In</button>
+</div>
+<div class="form-section" *ngIf="onBoardingForm && !passwordForm">
+  <form [formGroup]="onBoardingForm" (ngSubmit)="saveOnboardingForm()">
+      <section *ngIf="stepCount == 0" class="section-one" formGroupName="stepone">
+        <div class="form-header">
+          <h5>Let’s get you started</h5>
+          <p>Please select your country of residence</p>
+        </div>
+        <div>
+            <label>Country</label>
+            <select formControlName="country">
+                <option value="">Choose a country</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Tunisia">Tunisia</option>
+                <option value="Canada">Canada</option>
+            </select>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg btn-larger" type="button" (click)="moveNext(1)">Continue</button>
+        <div class="terms-condition" style="margin-top: 20px;">
+            <span>By signing up, you agree to the <span class="text-primary">Terms and condition and Privacy Policy.</span></span>
+        </div>
+      </section>
+      <section *ngIf="stepCount == 1" class="section-two" formGroupName="steptwo">
+        <div class="form-header">
+          <div class="ellipsis-space">
+            <div class="ellipsis-container">
+              <div class="ellipsis-active">1</div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis">2</div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis">3</div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis">4</div>
+            </div>
+          </div>
+        </div>
+        <div class="title-block">
+          <h5>Choose account type</h5>
+          <p>Please select your preferred account type below</p>
+        </div>
+        <div class="box-block">
+          <div class="box">
+            <img src="assets/img/svg/individual-icon.svg" alt="individual icon" />
+            <h3 class="mini-block">Individual Account</h3>
+          </div>
+          <div class="box">
+            <img src="assets/img/svg/corporate-icon.svg" alt="coporate icon" />
+            <h3 class="mini-block">Corporate Account</h3>
+          </div>
+        </div>
+        <fieldset>
+          <legend>Identity</legend>
+          <div>
+            <label>Citizenship</label>
+            <select formControlName="country">
+                <option value="">Choose citizenship</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Tunisia">Tunisia</option>
+                <option value="Canada">Canada</option>
+            </select>
+          </div>
+          <div>
+            <label>Identification type</label>
+            <select formControlName="country">
+                <option value="">Choose means of identification</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Tunisia">Tunisia</option>
+                <option value="Canada">Canada</option>
+            </select>
+          </div>
+          <div>
+            <label>Identification number</label>
+            <input type="text" placeholder="Enter your identification number here" formControlName="country" />
+          </div>
+        </fieldset>
+      </section>
+      <section *ngIf="stepCount == 2" class="section-three" formGroupName="stepthree">
+        <div class="form-header">
+          <div class="ellipsis-space">
+            <div class="ellipsis-container">
+              <div class="ellipsis-checked"></div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis-active">2</div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis">3</div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis">4</div>
+            </div>
+          </div>
+        </div>
+        <div class="title-block">
+          <h5>Verify your account</h5>
+          <p>Please provide an active phone number. We will send you a confirmation code.</p>
+        </div>
+        <div class="box-block">
+          <div class="box-bvn">
+            <p>Johnson Stephens</p>
+            <div class="details">
+              <div>
+                <p>BVN:</p>
+                <span>200000000000</span>
+              </div>
+              <div>
+                <p>Date Of Birth:</p>
+                <span>22 April 1993</span>
+              </div>
+              <div class="pr-3">
+                <p>Phone:</p>
+                <span>08083033939</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <label>Phone number</label>
+          <input type="text" placeholder="Enter your identification number here" formControlName="country" />
+        </div>
+      </section>
+      <section *ngIf="stepCount == 3" class="section-three" formGroupName="stepfour">
+        <div class="form-header">
+          <div class="ellipsis-space">
+            <div class="ellipsis-container">
+              <div class="ellipsis-checked"></div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis-checked"></div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis-active">3</div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis">4</div>
+            </div>
+          </div>
+        </div>
+        <div class="title-block">
+          <h5>Confirm your account</h5>
+          <p>Please enter the code that was sent to <br/>+2349011223278.</p>
+        </div>
+        <div class="single"></div>
+        <div class="mt-3">
+          <label>OTP</label>
+          <input type="text" placeholder="Pls enter the code here" formControlName="country" />
+        </div>
+      </section>
+      <section *ngIf="stepCount == 4" class="section-four" formGroupName="stepfive">
+        <div class="form-header">
+          <div class="ellipsis-space">
+            <div class="ellipsis-container">
+              <div class="ellipsis-checked"></div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis-checked"></div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis-checked"></div>
+            </div>
+            <div class="ellipsis-container">
+              <div class="ellipsis-active">4</div>
+            </div>
+          </div>
+        </div>
+        <div class="title-block">
+          <h5>Choose payment method</h5>
+          <p>Please select a preferred payment method below</p>
+        </div>
+        <div class="box-block">
+          <div class="box-notification mx-auto">
+            <div class="mr-4">
+              <img src="assets/img/svg/notification.svg" alt="notification bell"/>
+            </div>
+            <div>
+              <p>Please kindly note that you will be charged the sum of
+                <b>₦1,500</b> to generate your Police Background Check Number(PBCN)</p>
+            </div>
+          </div>
+        </div>
+        <fieldset>
+          <legend>Payment Methods</legend>
+          <div class="box-card mb-4">
+            <div>
+              <img src="assets/img/svg/card-icon.svg" alt="credit card icon" />
+            </div>
+            <div class="mx-auto p-2">
+              <p>Pay with your card</p>
+            </div>
+            <div class="mx-auto">
+              <div class="price-box">₦1,500</div>
+            </div>
+          </div>
+          <div class="box-card mb-4">
+            <div>
+              <img src="assets/img/svg/bank-icon.svg" alt="bank icon" />
+            </div>
+            <div class="mx-auto p-2">
+              <p>Pay with your bank</p>
+            </div>
+            <div class="mx-auto">
+              <div class="price-box">₦1,500</div>
+            </div>
+          </div>
+        </fieldset>
+      </section>
+      <div class="next-prev" *ngIf="stepCount > 0">
+        <button class="btn btn-link button-link" type="button" (click)="moveNext(-1)">PREVIOUS</button>
+        <button class="btn btn-primary btn-lg" *ngIf="stepCount < 4" type="button" (click)="moveNext(1)">NEXT</button>
+        <button class="btn btn-primary btn-lg" *ngIf="stepCount == 4" type="submit">NEXT</button>
+      </div>
+  </form>
+
+  <div *ngIf="setupCompleted" class="completed">
+    <div class="form-header mx-auto my-3">
+      <img src="assets/img/svg/success-check.svg" alt="success" />
+    </div>
+    <div class="title-block">
+      <h5>Setup completed</h5>
+      <p>Click the proceed button to receive your PBCN </p>
+    </div>
+    <div class="single"></div>
+
+    <button class="btn btn-primary btn-lg my-5 mx-auto" type="button" (click)="initPasswordForm()">Proceed</button>
+  </div>
+</div>
+<div class="form-section" *ngIf="passwordForm">
+  <form [formGroup]="passwordForm" (ngSubmit)="savePasswordForm()">
+    <section *ngIf="password" class="mx-5 my-3">
+      <div class="bax-block">
+        <div class="box-notification mx-auto">
+          <div class="mr-4">
+            <img src="assets/img/svg/notification.svg" alt="notification bell"/>
+          </div>
+          <div>
+            <p>Please remember that your PBCN will be used to login on this portal. Ensure to keep it safe!</p>
+          </div>
+        </div>
+      </div>
+      <div class="single"></div>
+      <div class="headx my-4">
+        <p>Please set a password to continue</p>
+      </div>
+      <div>
+          <label>Password</label>
+          <input type="text" placeholder="Enter password" formControlName="password" />
+      </div>
+      <div>
+        <label>Confirm Password</label>
+        <input type="text" placeholder="Enter password again" formControlName="password" />
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary btn-lg btn-larger mx-auto" type="submit">PROCEED</button>
+      </div>
+    </section>
+    <section *ngIf="copyPBCN" class="mx-5 my-3">
+      <div class="title-block">
+        <p>Your PBCN has been sent to your registered phone <br/>number: <b>+2349021399264</b></p>
+      </div>
+      <div class="box-block">
+        <div class="box-notification mx-auto p-2" style="justify-content: space-between;">
+          <div>
+            <span>Your PBCN is <b>PB1122377271</b></span>
+          </div>
+          <div style="background: #BAE8E8;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
+          border-radius: 4px;
+          width: 50px;
+          height: 30px;
+          text-align: center;
+          line-height: 30px;">Copy</div>
+        </div>
+      </div>
+
+      <div class="bax-block">
+        <div class="box-notification mx-auto">
+          <div class="mr-4">
+            <img src="assets/img/svg/notification.svg" alt="notification bell"/>
+          </div>
+          <div>
+            <p>Please remember that your PBCN will be used to login on this portal. Ensure to keep it safe!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-primary btn-lg btn-larger" type="button" [routerLink]="['/signin']" routerLinkActive="router-link-active" >PROCEED TO SIGNIN</button>
+      </div>
+    </section>
+  </form>
+</div>

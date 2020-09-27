@@ -1,0 +1,121 @@
+main {
+  padding: 30px;
+  h5.title {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #00184B;
+    margin: 100px 0px 20px auto;
+  }
+
+  .app-notice {
+    min-height: 120px;
+    background: #fcfcfb url('../../../assets/img/png/application.png') no-repeat center center scroll;
+    background-size: 120%;
+    filter: drop-shadow(0px 2px 20px rgba(0, 0, 0, 0.05));
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .app-notice::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    background: #272643;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 4px 0px 0px 4px;
+    min-height: 120px;
+  }
+
+  .dash-card-one {
+    display: inline-block;
+    width: 100%;
+    height: 120px;
+    background: url('../../../assets/img/png/cardbg-1.png') no-repeat center center scroll;
+    filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.06));
+    border-radius: 8px;
+    background-size: 120%;
+    color: #fff;
+    padding: 20px;
+    p {
+      margin: unset;
+    }
+    p.mid-title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 29px;
+      margin: 5px auto;
+    }
+  }
+  .dash-card-two {
+    display: inline-block;
+    width: 100%;
+    height: 120px;
+    background: url('../../../assets/img/png/cardbg-2.png') no-repeat center center scroll;
+    filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.06));
+    border-radius: 8px;
+    background-size: 120%;
+    color: #fff;
+    padding: 20px;
+    p {
+      margin: unset;
+    }
+    p.mid-title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 29px;
+      margin: 5px auto;
+    }
+  }
+  .dash-card-three {
+    display: inline-block;
+    width: 100%;
+    height: 120px;
+    background: url('../../../assets/img/png/cardbg-3.png') no-repeat center center scroll;
+    filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.06));
+    border-radius: 8px;
+    background-size: 120%;
+    color: #fff;
+    padding: 20px;
+    p {
+      margin: unset;
+    }
+    p.mid-title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 29px;
+      margin: 5px auto;
+    }
+  }
+  .dash-card-four {
+    display: inline-block;
+    width: 100%;
+    height: 120px;
+    background: url('../../../assets/img/png/cardbg-4.png') no-repeat center center scroll;
+    filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.06));
+    border-radius: 8px;
+    background-size: 120%;
+    color: #fff;
+    padding: 20px;
+    p {
+      margin: unset;
+    }
+    p.mid-title {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 29px;
+      margin: 5px auto;
+    }
+  }
+}

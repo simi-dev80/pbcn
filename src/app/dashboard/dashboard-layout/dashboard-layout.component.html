@@ -1,0 +1,60 @@
+<header>
+  <div class="cookie">
+    <div class="menu-hamburger">
+      <img src="assets/img/svg/menu.svg" alt="menu hamburger" />
+    </div>
+    <div class="icon-holder">
+      <img src="assets/img/svg/icon.svg" alt="mapp icon" />
+    </div>
+  </div>
+  <div class="search-form">
+    <input type="search" placeholder="Search in app ..."/>
+  </div>
+  <div class="sign-out">
+    <img src="assets/img/svg/power.svg" alt="sign-out icon" routerLink="['/signin']" />
+  </div>
+</header>
+<main>
+  <aside>
+    <div class="profile-header">
+      <div class="img">
+        <img src="../../../assets/img/png/author-1.png" alt="profile image" />
+      </div>
+      <div class="name">
+        <p>Houssem Aouar</p>
+      </div>
+    </div>
+    <div class="menu">
+      <div class="menu-header-title">Menu</div>
+      <ul class="menu-item">
+        <li>
+          <a [routerLink]="['/dashboard']" routerLinkActive="menu-item-active"  class="menu-item-list">
+            <img src="assets/img/svg/dashboard.svg" class="mr-4" /> Dashboard</a>
+        </li>
+      </ul>
+      <div class="menu-header-title">Request</div>
+      <ul class="menu-item">
+        <li><a [routerLink]="['/background-check']" routerLinkActive="menu-item-active"  class="menu-item-list">
+          <img src="assets/img/svg/background-check.svg" class="mr-4" /> Background Check</a></li>
+        <li><a [routerLink]="['/clearance-certificate']" routerLinkActive="menu-item-active"  class="menu-item-list">
+          <img src="assets/img/svg/character-check.svg" class="mr-4" />Character Certificate</a></li>
+      </ul>
+      <div class="menu-header-title">Applications</div>
+      <ul class="menu-item">
+        <li><a [routerLink]="['/applications']" routerLinkActive="menu-item-active"  class="menu-item-list">
+          <img src="assets/img/svg/application.svg" class="mr-4" />Pending Application</a></li>
+      </ul>
+      <div class="menu-header-title">Account</div>
+      <ul class="menu-item">
+        <li><a [routerLink]="['/profile']" routerLinkActive="menu-item-active"  class="menu-item-list">
+          <img src="assets/img/svg/profile.svg" class="mr-4" />Profile</a></li>
+      </ul>
+    </div>
+  </aside>
+  <section class="main">
+    <router-outlet></router-outlet>
+    <footer>
+      <span>Copyright The Nigerian Police Force 2020</span>
+    </footer>
+  </section>
+</main>

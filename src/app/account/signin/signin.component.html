@@ -1,0 +1,29 @@
+<div class="actions">
+  <p>Don't have an account?</p>
+  <button class="btn btn-light" [routerLink]="['/signup']" type="button">Get Started</button>
+</div>
+<div class="form-section">
+  <form [formGroup]="signinForm" (ngSubmit)="saveSignInForm()">
+      <section>
+        <div class="title-block">
+          <h5>Sign in to PBCN</h5>
+          <p>Please Login into your account</p>
+        </div>
+        <div>
+          <label>PBCN number</label>
+          <input type="text" placeholder="Enter your pbcn number" formControlName="pbcnNumber" />
+        </div>
+        <div>
+            <div class="d-flex">
+                <label>Password</label>
+                <a href="#" [routerLink]="['/forgot-password']" routerLinkActive="router-link-active"  style="color: #0E0AE9">Forgot Password?</a>
+            </div>
+            <input type="password" placeholder="Enter your password" formControlName="password" />
+        </div>
+        <button class="btn btn-primary btn-block btn-lg btn-larger" type="submit">Signin</button>
+        <!-- <div class="terms-condition" style="margin-top: 20px;">
+            <span>By signing up, you agree to the <span class="text-primary">Terms and condition and Privacy Policy.</span></span>
+        </div> -->
+      </section>
+  </form>
+</div>

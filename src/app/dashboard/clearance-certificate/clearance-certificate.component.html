@@ -1,0 +1,98 @@
+<main>
+  <div class="row mb-4">
+    <div class="col">
+      <h5 class="title">Police Clearance Certificate</h5>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-12 col-md-8 offset-md-2">
+      <form [formGroup]="characterClearanceForm" (ngSubmit)="saveCharacterClearance()">
+        <div class="form-section">
+          <section formGroupName="stepone" *ngIf="stepCount == 0" class="section-one">
+            <div class="form-header">
+              <div class="ellipsis-space">
+                <!-- <div class="ellipsis-container">
+                  <div class="ellipsis-checked"></div>
+                </div> -->
+                <div class="ellipsis-container">
+                  <div class="ellipsis-active">1</div>
+                </div>
+                <div class="ellipsis-container">
+                  <div class="ellipsis">2</div>
+                </div>
+              </div>
+            </div>
+            <div class="title-block">
+              <h5>Request for character certificate</h5>
+              <p>Please provide your details below to continue</p>
+            </div>
+            <div class="mt-3">
+              <label>Country</label>
+              <select formControlName="country">
+                  <option value="">Choose a country</option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="Tunisia">Tunisia</option>
+                  <option value="Canada">Canada</option>
+              </select>
+            </div>
+            <div class="mt-3">
+              <label>Application Type</label>
+              <select>
+                  <option value="">Choose</option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="Tunisia">Tunisia</option>
+                  <option value="Canada">Canada</option>
+              </select>
+            </div>
+          </section>
+          <section formGroupName="steptwo" *ngIf="stepCount == 1" class="section-one">
+            <div class="form-header">
+              <div class="ellipsis-space">
+                <div class="ellipsis-container">
+                  <div class="ellipsis-checked"></div>
+                </div>
+                <div class="ellipsis-container">
+                  <div class="ellipsis-active">2</div>
+                </div>
+              </div>
+            </div>
+            <div class="title-block">
+              <h5>Choose payment</h5>
+            </div>
+            <fieldset>
+              <legend>Payment Methods</legend>
+              <div class="box-card mb-4">
+                <div>
+                  <img src="assets/img/svg/card-icon.svg" alt="credit card icon" />
+                </div>
+                <div class="mx-auto p-2">
+                  <p>Pay with your card</p>
+                </div>
+                <div class="mx-auto">
+                  <div class="price-box">₦1,500</div>
+                </div>
+              </div>
+              <div class="box-card mb-4">
+                <div>
+                  <img src="assets/img/svg/bank-icon.svg" alt="bank icon" />
+                </div>
+                <div class="mx-auto p-2">
+                  <p>Pay with your bank</p>
+                </div>
+                <div class="mx-auto">
+                  <div class="price-box">₦1,500</div>
+                </div>
+              </div>
+            </fieldset>
+          </section>
+        </div>
+        <div class="footer-space">
+          <button class="btn btn-link button-link" type="button" (click)="moveNext(-1)" *ngIf="stepCount == 1">PREVIOUS</button>
+          <button class="btn btn-primary btn-lg" (click)="moveNext(1)" *ngIf="stepCount == 0" type="button">NEXT</button>
+          <button class="btn btn-primary btn-lg" *ngIf="stepCount == 1" type="submit">SUBMIT</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</main>

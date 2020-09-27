@@ -1,0 +1,186 @@
+$small: 300px;
+$medium: 700px;
+header {
+  z-index: 10;
+  height: 74px;
+  width: 100%;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 30px;
+  .cookie {
+    display: flex;
+    justify-content: flex-start;
+    .icon-holder {
+      margin-left: 50px;
+      text-align: center;
+      vertical-align: middle;
+      display: flex;
+      img {
+        width: 45px;
+      }
+    }
+    .menu-hamburger {
+      text-align: center;
+      vertical-align: middle;
+      display: flex;
+      cursor: pointer;
+    }
+
+  }
+  .sign-out {
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    cursor: pointer;
+    img {
+      width: 30px;
+    }
+  }
+  .search-form {
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    margin-left: -500px;
+     //some CSS
+    @media screen and (max-width: 700px) {
+      display: none;
+    }
+    @media screen and (min-width: 700px) {
+      display: flex;
+    }
+    input[type=search] {
+      background: #F2F3FA;
+      border: 1px solid #C3C5DB;
+      box-sizing: border-box;
+      border-radius: 4px;
+      height: 40px;
+      width: 400px;
+      margin-top: 20px;
+      padding-left: 50px;
+      outline: none;
+    }
+  }
+  .search-form::before {
+    content: url('../../../assets/img/svg/search.svg');
+    position: absolute;
+    top: 28px;
+    left: 15px;
+  }
+}
+
+main {
+  background: #F5F7F8;
+  display: flex;
+
+  aside {
+    min-height: 100vh;
+    width: 310px;
+    background: #272643;
+    padding: 1px;
+    @media screen and (max-width: 700px) {
+      display: none;
+    }
+    @media screen and (min-width: 700px) {
+      display: block;
+    }
+    .profile-header {
+      display: flex;
+      justify-content: flex-start;
+      margin: 120px 30px auto 30px;
+      border-bottom: 2px solid #fff;
+      padding-bottom: 15px;
+      .img {
+        border-radius: 50%;
+        border: 4px solid #fff;
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+      .name {
+        vertical-align: middle;
+        p {
+          margin-left: 15px;
+          color: #fff;
+          margin-bottom: unset;
+          font-weight: 500;
+        }
+         //some CSS
+        @media screen and (max-width: $small) {
+          //do Smth
+          line-height: unset;
+        }
+        @media screen and (min-width: $medium) {
+          line-height: unset;
+        }
+        @media screen and (min-width: 900px) {
+          line-height: 55px;
+        }
+      }
+    }
+    .menu {
+      .menu-header-title {
+        font-family: Inter;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 30px;
+        color: #A8A6CE;
+        margin-top: 20px;
+        padding-left: 30px;
+        padding-bottom: 5px;
+      }
+      ul.menu-item {
+          list-style-type: none;
+          padding: 0;
+          li>a.menu-item-list {
+            text-decoration: none;
+            padding-left: 30px;
+            font-family: Inter;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 15px;
+            line-height: 30px;
+            color: #FFF;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            padding-right: 15px;
+            cursor: pointer;
+            display: block;
+          }
+          li>a.menu-item-list:hover {
+            background: rgba(79, 77, 137, 0.6);
+          }
+          li>a.menu-item-active {
+            background: rgba(79, 77, 137, 0.6);
+          }
+      }
+    }
+  }
+  .main {
+    @media screen and (max-width: 700px) {
+      width: 100%;
+    }
+    @media screen and (min-width: 700px) {
+      width: 1208px;
+    }
+    footer {
+      height: 50px;
+      background:#FFF;
+      filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.06));
+      color: #272643;
+      padding-left: 30px;
+      padding-right: 30px;
+      font-size: 14px;
+      padding-top: 15px;
+      padding-bottom: 10px;
+      // position: fixed;
+      // bottom: 0;
+      // width: 100%;
+    }
+  }
+}
