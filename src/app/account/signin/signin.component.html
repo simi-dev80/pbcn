@@ -9,18 +9,21 @@
           <h5>Sign in to PBCN</h5>
           <p>Please Login into your account</p>
         </div>
-        <div>
-          <label>PBCN number</label>
-          <input type="text" placeholder="Enter your pbcn number" formControlName="pbcnNumber" />
+        <div [ngClass]="{'error-feedback': errorFeedback != ''}">
+          <label>Username</label>
+          <input type="text" placeholder="Enter your username" formControlName="username"/>
+          <span *ngIf="errorFeedback != ''">{{errorFeedback}}</span>
         </div>
         <div>
-            <div class="d-flex">
-                <label>Password</label>
-                <a href="#" [routerLink]="['/forgot-password']" routerLinkActive="router-link-active"  style="color: #0E0AE9">Forgot Password?</a>
-            </div>
-            <input type="password" placeholder="Enter your password" formControlName="password" />
+          <div class="d-flex">
+            <label>Password</label>
+            <a href="#" [routerLink]="['/forgot-password']" routerLinkActive="router-link-active"  style="color: #0E0AE9">Forgot Password?</a>
+          </div>
+          <input type="password" placeholder="Enter your password" formControlName="password" />
         </div>
-        <button class="btn btn-primary btn-block btn-lg btn-larger" type="submit">Signin</button>
+        <button class="btn btn-primary btn-block btn-lg btn-larger" type="submit" [disabled]="signinForm.invalid || loader">
+          <span class="mr-2">Signin</span> <fa-icon [icon]="faSpinner" size="lg" [pulse]="true" *ngIf="loader"></fa-icon>
+        </button>
         <!-- <div class="terms-condition" style="margin-top: 20px;">
             <span>By signing up, you agree to the <span class="text-primary">Terms and condition and Privacy Policy.</span></span>
         </div> -->

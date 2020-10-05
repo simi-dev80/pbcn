@@ -9,16 +9,16 @@
           <h5>Let’s get you started</h5>
           <p>Please select your country of residence</p>
         </div>
-        <div>
+        <div style="position: relative;" [ngClass]="{'error-feedback': message != ''}">
             <label>Country</label>
-            <select formControlName="country">
-                <option value="">Choose a country</option>
-                <option value="Nigeria">Nigeria</option>
-                <option value="Tunisia">Tunisia</option>
-                <option value="Canada">Canada</option>
+            <select (change)="getCountryFromIp($event.target.value)">
+              <option value="">Choose a country</option>
+              <option *ngFor="let item of countryList" [value]="item">{{item[1]}}</option>
             </select>
+            <span class="text-danger" [innerHTML]="message|TrustHtml"></span>
+            <span class="loader" *ngIf="countryLoader"><fa-icon [icon]="faSpinner" size="lg" [pulse]="true"></fa-icon></span>
         </div>
-        <button class="btn btn-primary btn-block btn-lg btn-larger" type="button" (click)="moveNext(1)">Continue</button>
+        <button class="btn btn-primary btn-block btn-lg btn-larger" [disabled]="onBoardingForm.get('stepone').invalid" type="button" (click)="moveNext(1)">Continue</button>
         <div class="terms-condition" style="margin-top: 20px;">
             <span>By signing up, you agree to the <span class="text-primary">Terms and condition and Privacy Policy.</span></span>
         </div>
@@ -45,40 +45,53 @@
           <p>Please select your preferred account type below</p>
         </div>
         <div class="box-block">
-          <div class="box">
+          <div class="box" [ngClass]="{'active': accountType == 'Individual'}" (click)="selectAccountType('Individual')">
             <img src="assets/img/svg/individual-icon.svg" alt="individual icon" />
             <h3 class="mini-block">Individual Account</h3>
+            <div class="tick" *ngIf="accountType == 'Individual'">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.5 14.9951C11.6421 14.9951 15 11.6394 15 7.50002C15 3.3606 11.6421 0.00494385 7.5 0.00494385C3.35786 0.00494385 0 3.3606 0 7.50002C0 11.6394 3.35786 14.9951 7.5 14.9951Z" fill="#2F1C49"/>
+                <path d="M6.89863 11.4867L3.35254 8.72415L4.36082 7.43016L6.5384 9.12657L10.1323 3.94055L11.4809 4.87477L6.89863 11.4867Z" fill="white"/>
+              </svg>
+            </div>
           </div>
-          <div class="box">
-            <img src="assets/img/svg/corporate-icon.svg" alt="coporate icon" />
+          <div class="box" [ngClass]="{'active': accountType == 'Corporate'}" (click)="selectAccountType('Corporate')">
+            <img src="assets/img/svg/corporate-icon.svg" alt="corporate icon" />
             <h3 class="mini-block">Corporate Account</h3>
+            <div class="tick" *ngIf="accountType == 'Corporate'">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.5 14.9951C11.6421 14.9951 15 11.6394 15 7.50002C15 3.3606 11.6421 0.00494385 7.5 0.00494385C3.35786 0.00494385 0 3.3606 0 7.50002C0 11.6394 3.35786 14.9951 7.5 14.9951Z" fill="#2F1C49"/>
+                <path d="M6.89863 11.4867L3.35254 8.72415L4.36082 7.43016L6.5384 9.12657L10.1323 3.94055L11.4809 4.87477L6.89863 11.4867Z" fill="white"/>
+              </svg>
+            </div>
           </div>
         </div>
         <fieldset>
           <legend>Identity</legend>
           <div>
             <label>Citizenship</label>
-            <select formControlName="country">
+            <select formControlName="citizenship">
                 <option value="">Choose citizenship</option>
-                <option value="Nigeria">Nigeria</option>
-                <option value="Tunisia">Tunisia</option>
-                <option value="Canada">Canada</option>
+                <option value="Nigerian">Nigerian</option>
+                <option value="Non-Nigerian">Non-Nigerian</option>
             </select>
           </div>
           <div>
             <label>Identification type</label>
-            <select formControlName="country">
+            <select formControlName="identificationtype" (change)="identityTypeChange($event.target.value)">
                 <option value="">Choose means of identification</option>
-                <option value="Nigeria">Nigeria</option>
-                <option value="Tunisia">Tunisia</option>
-                <option value="Canada">Canada</option>
+                <option *ngFor="let item of identityType" [value]="item?.name">{{item?.description}}</option>
             </select>
           </div>
           <div>
-            <label>Identification number</label>
-            <input type="text" placeholder="Enter your identification number here" formControlName="country" />
+            <label>Identification number {{onBoardingForm.get('steptwo.identificationtype').value ? '(' + onBoardingForm.get('steptwo.identificationtype').value + ')' : ''}}</label>
+            <input type="text" [placeholder]="'Enter your ' + onBoardingForm.get('steptwo.identificationtype').value + ' number here'" formControlName="identificationnumber"/>
           </div>
         </fieldset>
+        <div class="next-prev">
+          <button class="btn btn-link button-link" type="button" (click)="moveNext(-1)">PREVIOUS</button>
+          <button class="btn btn-primary btn-lg" type="button" (click)="moveNext(1)" [disabled]="onBoardingForm.get('steptwo').invalid">NEXT</button>
+        </div>
       </section>
       <section *ngIf="stepCount == 2" class="section-three" formGroupName="stepthree">
         <div class="form-header">
@@ -99,30 +112,64 @@
         </div>
         <div class="title-block">
           <h5>Verify your account</h5>
-          <p>Please provide an active phone number. We will send you a confirmation code.</p>
+          <p>Please provide an active phone number and email address. We will send you a confirmation code.</p>
         </div>
         <div class="box-block">
-          <div class="box-bvn">
-            <p>Johnson Stephens</p>
+          <div class="box-bvn" *ngIf="identificationType?.name != 'RCN'">
+            <p>{{ userInfo?.firstName + ' ' + userInfo?.lastName }}</p>
             <div class="details">
               <div>
-                <p>BVN:</p>
-                <span>200000000000</span>
+                <p>{{identificationType?.name}}:</p>
+                <ng-container *ngIf="userInfo?.type == 'NIN'">
+                  <span>{{ userInfo?.nin }}</span>
+                </ng-container>
+                <ng-container *ngIf="userInfo?.type == 'BVN'">
+                  <span>{{ userInfo?.bvn }}</span>
+                </ng-container>
               </div>
               <div>
                 <p>Date Of Birth:</p>
-                <span>22 April 1993</span>
+                <span>{{ userInfo?.doB }}</span>
               </div>
               <div class="pr-3">
                 <p>Phone:</p>
-                <span>08083033939</span>
+                <span>{{ userInfo?.phone }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="box-bvn" *ngIf="identificationType?.name == 'RCN'">
+            <p>{{ userInfo?.name }}</p>
+            <div class="details">
+              <div>
+                <p>{{identificationType?.name}}:</p>
+                <span>{{ userInfo?.rcn }}</span>
+              </div>
+              <div>
+                <p>Founded:</p>
+                <span>{{ userInfo?.founded }}</span>
+              </div>
+              <div>
+                <p>Address:</p>
+                <span>{{ userInfo?.hqAddress }}</span>
+              </div>
+              <div class="pr-3">
+                <p>Phone:</p>
+                <span>{{ userInfo?.phone }}</span>
               </div>
             </div>
           </div>
         </div>
         <div class="mt-3">
-          <label>Phone number</label>
-          <input type="text" placeholder="Enter your identification number here" formControlName="country" />
+          <label>Active Phone Number</label>
+          <input type="text" placeholder="Enter your current active phone number here" formControlName="phonenumber" />
+        </div>
+        <div class="mt-3 mb-5">
+          <label>Email Address</label>
+          <input type="email" placeholder="Enter your email address here" formControlName="emailAddress" />
+        </div>
+        <div class="next-prev">
+          <button class="btn btn-link button-link" type="button" (click)="moveNext(-1)">PREVIOUS</button>
+          <button class="btn btn-primary btn-lg" type="button" (click)="moveNext(1)" [disabled]="onBoardingForm.get('stepthree').invalid">NEXT</button>
         </div>
       </section>
       <section *ngIf="stepCount == 3" class="section-three" formGroupName="stepfour">
@@ -144,12 +191,16 @@
         </div>
         <div class="title-block">
           <h5>Confirm your account</h5>
-          <p>Please enter the code that was sent to <br/>+2349011223278.</p>
+          <p>Please enter the code that was sent to <br/>{{ onBoardingForm.get('stepthree.phonenumber').value }}.</p>
         </div>
         <div class="single"></div>
-        <div class="mt-3">
+        <div class="mt-3 mb-5">
           <label>OTP</label>
-          <input type="text" placeholder="Pls enter the code here" formControlName="country" />
+          <input type="text" placeholder="Pls enter the code here" formControlName="otp" />
+        </div>
+        <div class="next-prev">
+          <button class="btn btn-link button-link" type="button" (click)="moveNext(-1, 'PREV')">PREVIOUS</button>
+          <button class="btn btn-primary btn-lg" type="button" (click)="moveNext(1)" [disabled]="onBoardingForm.get('stepfour').invalid">NEXT</button>
         </div>
       </section>
       <section *ngIf="stepCount == 4" class="section-four" formGroupName="stepfive">
@@ -186,7 +237,13 @@
         </div>
         <fieldset>
           <legend>Payment Methods</legend>
-          <div class="box-card mb-4">
+          <button angular4-paystack [class]="'box-card mb-4'"
+          [email]="onBoardingForm.get('stepthree.emailAddress').value"
+          [amount]="150000"
+          [ref]="paystackRef"
+          type="button"
+          [channels]="['card']"
+          (callback)="paymentDone($event)">
             <div>
               <img src="assets/img/svg/card-icon.svg" alt="credit card icon" />
             </div>
@@ -196,8 +253,14 @@
             <div class="mx-auto">
               <div class="price-box">₦1,500</div>
             </div>
-          </div>
-          <div class="box-card mb-4">
+          </button>
+          <button  angular4-paystack [class]="'box-card mb-4'"
+          [email]="onBoardingForm.get('stepthree.emailAddress').value"
+          [amount]="150000"
+          [ref]="paystackRef"
+          [channels]="['bank']"
+          type="button"
+          (callback)="paymentDone($event)">
             <div>
               <img src="assets/img/svg/bank-icon.svg" alt="bank icon" />
             </div>
@@ -207,14 +270,18 @@
             <div class="mx-auto">
               <div class="price-box">₦1,500</div>
             </div>
-          </div>
+          </button>
         </fieldset>
+        <div class="next-prev">
+          <button class="btn btn-link button-link" type="button" (click)="moveNext(-1, 'PREV')">PREVIOUS</button>
+          <button class="btn btn-primary btn-lg" type="submit" [disabled]="onBoardingForm.invalid">NEXT</button>
+        </div>
       </section>
-      <div class="next-prev" *ngIf="stepCount > 0">
+      <!-- <div class="next-prev" *ngIf="stepCount > 0">
         <button class="btn btn-link button-link" type="button" (click)="moveNext(-1)">PREVIOUS</button>
-        <button class="btn btn-primary btn-lg" *ngIf="stepCount < 4" type="button" (click)="moveNext(1)">NEXT</button>
+        <button class="btn btn-primary btn-lg" *ngIf="stepCount < 4" type="button" (click)="moveNext(1)" [disabled]="(onBoardingForm.get('steptwo').invalid && stepCount == 1) || (onBoardingForm.get('stepthree').invalid && stepCount == 2) || (onBoardingForm.get('stepfour').invalid && stepCount == 3)">NEXT</button>
         <button class="btn btn-primary btn-lg" *ngIf="stepCount == 4" type="submit">NEXT</button>
-      </div>
+      </div> -->
   </form>
 
   <div *ngIf="setupCompleted" class="completed">
@@ -232,7 +299,7 @@
 </div>
 <div class="form-section" *ngIf="passwordForm">
   <form [formGroup]="passwordForm" (ngSubmit)="savePasswordForm()">
-    <section *ngIf="password" class="mx-5 my-3">
+    <section *ngIf="password" formGroupName="applicant" class="mx-5 my-3">
       <div class="bax-block">
         <div class="box-notification mx-auto">
           <div class="mr-4">
@@ -249,24 +316,24 @@
       </div>
       <div>
           <label>Password</label>
-          <input type="text" placeholder="Enter password" formControlName="password" />
+          <input type="password" placeholder="Enter password" formControlName="password" />
       </div>
       <div>
         <label>Confirm Password</label>
-        <input type="text" placeholder="Enter password again" formControlName="password" />
+        <input type="password" placeholder="Enter password again" formControlName="confirmPassword" />
       </div>
       <div class="text-center">
-        <button class="btn btn-primary btn-lg btn-larger mx-auto" type="submit">PROCEED</button>
+        <button class="btn btn-primary btn-lg btn-larger mx-auto" type="submit" [disabled]="passwordForm.invalid">PROCEED</button>
       </div>
     </section>
     <section *ngIf="copyPBCN" class="mx-5 my-3">
       <div class="title-block">
-        <p>Your PBCN has been sent to your registered phone <br/>number: <b>+2349021399264</b></p>
+        <p>Your PBCN has been sent to your registered phone <br/>number: <b>{{ onBoardingForm.get('stepthree.phonenumber').value }}</b></p>
       </div>
       <div class="box-block">
         <div class="box-notification mx-auto p-2" style="justify-content: space-between;">
           <div>
-            <span>Your PBCN is <b>PB1122377271</b></span>
+            <span>Your PBCN is <b>{{pbcn}}</b></span>
           </div>
           <div style="background: #BAE8E8;
           box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.12);
@@ -274,7 +341,7 @@
           width: 50px;
           height: 30px;
           text-align: center;
-          line-height: 30px;">Copy</div>
+          line-height: 30px;" *ngIf="pbcn" (click)="copyToClipboard(pbcn)">Copy</div>
         </div>
       </div>
 
@@ -295,3 +362,12 @@
     </section>
   </form>
 </div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">{{queryMessage}}</p>
+</ngx-spinner>

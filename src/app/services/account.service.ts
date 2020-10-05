@@ -10,19 +10,40 @@ export class AccountService {
 
   constructor(private http: HttpClient, private endpoint: Endpoint) { }
 
-  signIn(data: any): Observable<any> {
-    return this.http.post(this.endpoint.signin, data);
+  login(data: any): Observable<any> {
+    return this.http.post(this.endpoint.login, data);
   }
 
-  signUp(data: any): Observable<any> {
-    return this.http.post(this.endpoint.signup, data);
+  fetchcountries(): Observable<any> {
+    return this.http.get(this.endpoint.countries);
   }
 
-  forgot_password(data: any): Observable<any> {
-    return this.http.post(this.endpoint.forgot_password, data);
+  getIpInfo(): Observable<any> {
+    return this.http.get(this.endpoint.ipinfo);
   }
 
-  reset_password(data: any): Observable<any> {
-    return this.http.post(this.endpoint.reset_password, data);
+  fetchIdentityTypes(): Observable<any> {
+    return this.http.get(this.endpoint.fetch_identity_types);
   }
+
+  checkuserexist(data: any): Observable<any> {
+    return this.http.post(this.endpoint.user_exist, data);
+  }
+
+  queryserver(data: any): Observable<any> {
+    return this.http.post(this.endpoint.query_identity_server, data);
+  }
+
+  sendOtp(data: any): Observable<any> {
+    return this.http.post(this.endpoint.send_otp, data);
+  }
+
+  verifyOtp(data: any): Observable<any> {
+    return this.http.post(this.endpoint.verify_otp, data);
+  }
+
+  applyForPBCN(data: any): Observable<any> {
+    return this.http.post(this.endpoint.generate_applicant, data);
+  }
+
 }

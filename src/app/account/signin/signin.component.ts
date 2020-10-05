@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+// import { NotifierService } from 'angular-notifier';
 import { AccountService } from 'src/app/services/account.service';
 
 @Component({
@@ -12,6 +14,8 @@ import { AccountService } from 'src/app/services/account.service';
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
   loader = false;
+  faSpinner = faSpinner;
+  errorFeedback = '';
   constructor(private account: AccountService, private router: Router, private title: Title) { }
 
   ngOnInit(): void {
@@ -21,21 +25,22 @@ export class SigninComponent implements OnInit {
 
   initSigninForm() {
     this.signinForm = new FormGroup({
-      pbcnNumber: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
   }
 
   saveSignInForm() {
-    this.router.navigate(['/dashboard'])
-    // this.loader = true;
-    // this.account.signIn(this.signinForm.value).subscribe(res => {
-    //   // this.loader = false;
-    //   this.router.navigate(['/dashboard']);
-    // }, err => {
-    //   this.loader = false;
-    //   console.log(err.error);
-    // });
+    this.loader = true;
+    this.errorFeedback = '';
+    this.account.login(this.signinForm.value).subscribe(res => {
+      // this.loader = false;
+      this.router.navigate(['/dashboard']);
+    }, err => {
+      this.loader = false;
+      this.errorFeedback = err.error.message;
+      this.signinForm.get('password').setValue('');
+    });
   }
 
 }

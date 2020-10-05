@@ -2,6 +2,20 @@
   padding-top: 15px;
   padding-bottom: 15px;
   position: relative;
+  .error-feedback {
+    color: crimson;
+    margin-bottom: 25px;
+    select, input {
+      // border: 2px solid crimson;
+      margin-bottom: unset;
+    }
+  }
+  select {
+    cursor: pointer;
+    option {
+      cursor: pointer;
+    }
+  }
   .completed {
     background: #FFFFFF;
     opacity: 0.94;
@@ -186,6 +200,7 @@
     position: relative;
     width: 100%;
     .box {
+      position: relative;
       cursor: pointer;
       width: auto;
       height: 100px;
@@ -195,6 +210,13 @@
       margin: auto 15px;
       padding: 15px;
       text-align: left;
+      .tick {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        right: 10px;
+        top: 10px;
+      }
       img {
         margin-bottom: 10px;
       }
@@ -255,6 +277,9 @@
       text-align: left;
       color: #041C4E;
     }
+    .active{
+      border: 1px solid #2F1C49 !important;
+    }
   }
   .box-block::before {
     content: "";
@@ -304,7 +329,38 @@
       color: #949DC2;
       text-align: left;
     }
+    button {
+        display: flex;
+        width: 100%;
+        background: white;
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 35px;
+        cursor: pointer;
+        position: relative;
+        border: 1px solid #C6CBDF;
+        box-sizing: border-box;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        vertical-align: middle;
+        margin: 20px auto;
+        outline: unset;
+        .price-box {
+          margin-top: 8px;
+          text-align: center;
+          width: 78px;
+          height: 25px;
+          vertical-align: middle;
+          line-height: 25px;
+          font-weight: 700;
+          background: #BAE8E8;
+          border-radius: 30px;
+        }
+    }
     .box-card {
+      // cursor: pointer;
+      background: #fff;
       padding-top: 10px;
       padding-left: 20px;
       padding-right: 35px;
@@ -373,6 +429,11 @@
 
       color: #00184B;
     }
+  }
+  .loader {
+    position: absolute;
+    top: 45px;
+    right: 15px;
   }
 }
 

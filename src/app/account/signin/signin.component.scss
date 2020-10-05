@@ -9,6 +9,14 @@
   position: relative;
   section {
     width: 100%;
+    .error-feedback {
+      color: crimson;
+      margin-bottom: 25px;
+      input {
+        border: 2px solid crimson;
+        margin-bottom: unset;
+      }
+    }
     .title-block {
       margin-top: 20px;
       text-align: center;

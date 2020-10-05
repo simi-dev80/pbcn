@@ -9,7 +9,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AccountService } from '../services/account.service';
 import { SigninComponent } from './signin/signin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [SigninComponent, SignupComponent, ForgotPasswordComponent, AccountLayoutComponent, ResetPasswordComponent],
@@ -17,7 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AccountRoutingModule
+    AccountRoutingModule,
+    FontAwesomeModule,
+    SharedModule
   ],
   providers: [AccountService]
 })
